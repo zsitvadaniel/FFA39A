@@ -87,11 +87,11 @@ function fagyikLekerdezese() {
 function szerkesztesModalMegnyit(gomb) {
 
     const adat ={
-        fagyiNev: document.getElementById("fagyiNev").value,
-        fagyiTipus: document.getElementById("fagyiTipus").value,
-        fagyiAr: document.getElementById("fagyiAr").value,
-        fagyiLeiras: document.getElementById("fagyiLeiras").value,
-        fagyiElerheto: document.getElementById("fagyiElerheto").value,
+        fagyiNev: document.getElementById("szerekeztesNev").value,
+        fagyiTipus: document.getElementById("szerekeztesTipus").value,
+        fagyiAr: document.getElementById("szerekeztesAr").value,
+        fagyiLeiras: document.getElementById("szerekeztesLeiras").value,
+        fagyiElerheto: document.getElementById("szerekeztesElerheto").value,
     };
 
     fetch(API_URL + "/fagylaltok/" + document.getElementById("szerkesztesId").value, {
@@ -148,19 +148,19 @@ function ujFagyiMentese(e) {
         fagyiElerheto: document.getElementById("fagyiElerheto").value,
     };
 
-    fetch(API_URL + "/fagylaltok/" + document.getElementById("szerkesztesId").value, {
+    fetch(API_URL + "/fagylaltok/", {
         method: "POST",
         headers: {"Content-type": "application/json"},
         body: JSON.stringify(adat)
     })
     .then(r => r.json())
     .then(valasz => {
-        modalHide("szerkesztesModel");
-        uzenetMutat("Sikeres modositás", valasz.uzenet, "siker");
+        uzenetMutat("Sikeres mentes", valasz.uzenet, "siker");
+        fagyiUrlap.reset()
         fagyikLekerdezese();
     })
     .catch(() => {
-        uzenetMutat("Hiba", "Hiba történt a modositás során", "hiba")
+        uzenetMutat("Hiba", "Hiba történt a mentés során", "hiba")
     });
 
 }
